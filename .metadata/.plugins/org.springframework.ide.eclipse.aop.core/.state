@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aop-reference-model>
+<aop-project name="Admin"/>
+<aop-project name="Service_Registry"/>
+<aop-project name="AUTH-API"/>
+<aop-project name="Citizen-API"/>
+<aop-project name="Plan-API-Admin"/>
+<aop-project name="AdminServer"/>
+<aop-project name="Unit_Testing"/>
+<aop-project name="ED_API"/>
+<aop-project name="SSN_Web_API"/>
+</aop-reference-model>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;com.IES&apos; to &apos;com.admin&apos;&#x0A;- Original project: &apos;Admin&apos;&#x0A;- Original element: &apos;Admin/src/main/java/com.IES&apos;&#x0A;- Renamed element: &apos;Admin/src/main/java/com.admin&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;com.IES&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.IES" name="com.admin" qualified="false" references="true" stamp="1756797027472" textual="false" version="1.0"/>
+</session>

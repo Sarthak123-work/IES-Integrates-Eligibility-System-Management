@@ -1,0 +1,50 @@
+package com.IES.Entity;
+
+import java.time.LocalDate;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name = "Eligibility_tbl")
+//@Data
+@Builder
+public class EligibilityDetermination 
+{
+	 	@Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    private Integer edTraceId;
+
+	    @OneToOne(fetch = FetchType.LAZY)
+	    @JoinColumn(name = "app_number", nullable = false)
+	    private CitizenApplication citizenApplication;
+
+	    @Column(name = "plan_status", nullable = false)
+	    private String planStatus; // APPROVED / DENIED
+
+	    @Column(name = "plan_start_date")
+	    private LocalDate planStartDate;
+
+	    @Column(name = "plan_end_date")
+	    private LocalDate planEndDate;
+
+	    @Column(name = "benefit_amount")
+	    private Double benefitAmount;
+
+	    @Column(name = "denial_reason")
+	    private String denialReason;
+	    
+	    
+}

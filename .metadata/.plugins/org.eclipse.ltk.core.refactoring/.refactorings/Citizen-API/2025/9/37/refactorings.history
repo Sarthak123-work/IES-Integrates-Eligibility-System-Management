@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Gender.java&apos; to &apos;com.IES.DC.Enums.ActiveStatus.java&apos;&#x0A;- Original project: &apos;Citizen-API&apos;&#x0A;- Destination element: &apos;com.IES.DC.Enums.ActiveStatus.java&apos;&#x0A;- Original element: &apos;com.Citizen.Enums.Gender.java&apos;" description="Copy compilation unit" destination="=Plan-API-Admin/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.IES.DC.Enums{ActiveStatus.java" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.Citizen.Enums{Gender.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1757745378891" units="1" version="1.0"/>
+</session>

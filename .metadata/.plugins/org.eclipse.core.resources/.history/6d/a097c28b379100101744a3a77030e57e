@@ -1,0 +1,18 @@
+package com.IES.DTO;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+//@Data
+
+public class EdResponseDTO 
+{
+	private Integer appNum;
+    private String planName;
+    private String planStatus;
+    private Double benefitAmount;
+    private String denialReason;
+    
+    
+}

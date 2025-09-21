@@ -1,0 +1,111 @@
+package com.IES.DC.Entity;
+
+import javax.persistence.Column;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name = "DC_Edu_Tbl")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class DcEducation {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "edu_id")
+	private Integer eduId;
+
+	@NotBlank
+	@Column(name = "highest_degree", nullable = false)
+	private String highestDegree;
+
+	@NotNull
+	@Column(name = "grad_year", nullable = false)
+	private Integer gradYear;
+
+	@NotBlank
+	@Column(name = "uni_name", nullable = false)
+	private String uniName;
+
+	// Many educations belong to one CitizenApplication
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "app_number", nullable = false)
+	private CitizenApplication citizenApplication;
+
+	public Integer getEduId() {
+		return eduId;
+	}
+
+	public void setEduId(Integer eduId) {
+		this.eduId = eduId;
+	}
+
+	public String getHighestDegree() {
+		return highestDegree;
+	}
+
+	public void setHighestDegree(String highestDegree) {
+		this.highestDegree = highestDegree;
+	}
+
+	public Integer getGradYear() {
+		return gradYear;
+	}
+
+	public void setGradYear(Integer gradYear) {
+		this.gradYear = gradYear;
+	}
+
+	public String getUniName() {
+		return uniName;
+	}
+
+	public void setUniName(String uniName) {
+		this.uniName = uniName;
+	}
+
+	public CitizenApplication getCitizenApplication() {
+		return citizenApplication;
+	}
+
+	public void setCitizenApplication(CitizenApplication citizenApplication) {
+		this.citizenApplication = citizenApplication;
+	}
+
+	public DcEducation(Integer eduId, @NotBlank String highestDegree, @NotNull Integer gradYear,
+			@NotBlank String uniName, CitizenApplication citizenApplication) {
+		super();
+		this.eduId = eduId;
+		this.highestDegree = highestDegree;
+		this.gradYear = gradYear;
+		this.uniName = uniName;
+		this.citizenApplication = citizenApplication;
+	}
+
+	public DcEducation() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public String toString() {
+		return "DcEducation [eduId=" + eduId + ", highestDegree=" + highestDegree + ", gradYear=" + gradYear
+				+ ", uniName=" + uniName + ", citizenApplication=" + citizenApplication + "]";
+	}
+	
+	
+}

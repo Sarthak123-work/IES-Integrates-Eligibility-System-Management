@@ -1,0 +1,5 @@
+package com.IES.Enum;
+
+public enum Gender1 {
+
+}

@@ -1,0 +1,115 @@
+package com.IES.Entity;
+
+import java.time.LocalDate;
+
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name = "DC_Kids_Tbl")
+@Data
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class DCKid 
+{
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "kid_id")
+	private Integer kidId;
+
+	@NotBlank
+	@Size(min = 2, max = 50)
+	@Column(name = "kid_name", nullable = false)
+	private String kidName;
+
+//	@Past
+	@Column(name = "kid_dob", nullable = false)
+	private String kidDob;
+
+	@Column(name = "kid_ssn", unique = true, nullable = false)
+	private Long kidSsn;
+
+	// Many kids belong to one CitizenApplication
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "app_number", nullable = false)
+	private CitizenApplication citizenApplication;
+
+	public Integer getKidId() {
+		return kidId;
+	}
+
+	public void setKidId(Integer kidId) {
+		this.kidId = kidId;
+	}
+
+	public String getKidName() {
+		return kidName;
+	}
+
+	public void setKidName(String kidName) {
+		this.kidName = kidName;
+	}
+
+	public String getKidDob() {
+		return kidDob;
+	}
+
+	public void setKidDob(String kidDob) {
+		this.kidDob = kidDob;
+	}
+
+	public Long getKidSsn() {
+		return kidSsn;
+	}
+
+	public void setKidSsn(Long kidSsn) {
+		this.kidSsn = kidSsn;
+	}
+
+	public CitizenApplication getCitizenApplication() {
+		return citizenApplication;
+	}
+
+	public void setCitizenApplication(CitizenApplication citizenApplication) {
+		this.citizenApplication = citizenApplication;
+	}
+
+	@Override
+	public String toString() {
+		return "DcKid [kidId=" + kidId + ", kidName=" + kidName + ", kidDob=" + kidDob + ", kidSsn=" + kidSsn
+				+ ", citizenApplication=" + citizenApplication + "]";
+	}
+
+	public DCKid(Integer kidId, @NotBlank @Size(min = 2, max = 50) String kidName, String kidDob, Long kidSsn,
+			CitizenApplication citizenApplication) {
+		super();
+		this.kidId = kidId;
+		this.kidName = kidName;
+		this.kidDob = kidDob;
+		this.kidSsn = kidSsn;
+		this.citizenApplication = citizenApplication;
+	}
+
+	public DCKid() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+}

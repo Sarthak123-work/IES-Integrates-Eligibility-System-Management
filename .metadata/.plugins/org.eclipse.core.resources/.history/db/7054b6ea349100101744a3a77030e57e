@@ -1,0 +1,192 @@
+package com.IES.Entity;
+
+import java.time.LocalDate;
+
+
+import java.time.LocalDate;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import com.IES.Enum.ActiveStatus;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name = "plan_master_tbl")
+//@Data
+@Builder
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class PlanMaster
+{
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "plan_id")
+	private Integer planId;
+
+	@NotBlank(message = "Plan name is mandatory")
+	@Size(min = 3, max = 100, message = "Plan name must be between 3 and 100 characters")
+	@Column(name = "plan_name", nullable = false)
+	private String planName;
+
+	@NotNull(message = "Plan start date is required")
+	@Column(name = "plan_start_date")
+	private LocalDate planStartDate;
+
+	@NotNull(message = "Plan end date is required")
+	@Column(name = "plan_end_date")
+	private LocalDate planEndDate;
+
+	@NotNull(message = "Plan status is required (Y or N)")
+	@Enumerated(EnumType.STRING)
+	@Column(name = "active_sw")
+	private ActiveStatus activeSw;
+
+	@Size(max = 255, message = "Comments cannot be more than 255 characters")
+	@Column(name = "comments")
+	private String comments;
+
+	@Column(name = "created_date", updatable = false)
+	@CreationTimestamp
+	private LocalDate createdDate;
+	
+
+	@Column(name = "updated_date")
+	@UpdateTimestamp
+	private LocalDate updatedDate;
+	
+	@Column(name = "created_by")
+	private String createdBy;
+
+	@Column(name = "updated_by")
+	private String updatedBy;
+
+	public Integer getPlanId() {
+		return planId;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public String getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public void setPlanId(Integer planId) {
+		this.planId = planId;
+	}
+
+	public String getPlanName() {
+		return planName;
+	}
+
+	public void setPlanName(String planName) {
+		this.planName = planName;
+	}
+
+	public LocalDate getPlanStartDate() {
+		return planStartDate;
+	}
+
+	public void setPlanStartDate(LocalDate planStartDate) {
+		this.planStartDate = planStartDate;
+	}
+
+	public LocalDate getPlanEndDate() {
+		return planEndDate;
+	}
+
+	public void setPlanEndDate(LocalDate planEndDate) {
+		this.planEndDate = planEndDate;
+	}
+
+	public ActiveStatus getActiveSw() {
+		return activeSw;
+	}
+
+	public void setActiveSw(ActiveStatus activeSw) {
+		this.activeSw = activeSw;
+	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
+	public LocalDate getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(LocalDate createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public LocalDate getUpdatedDate() {
+		return updatedDate;
+	}
+
+	public void setUpdatedDate(LocalDate updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+
+	public PlanMaster(Integer planId,
+			@NotBlank(message = "Plan name is mandatory") @Size(min = 3, max = 100, message = "Plan name must be between 3 and 100 characters") String planName,
+			@NotNull(message = "Plan start date is required") LocalDate planStartDate,
+			@NotNull(message = "Plan end date is required") LocalDate planEndDate,
+			ActiveStatus activeSw,
+			@Size(max = 255, message = "Comments cannot be more than 255 characters") String comments,
+			LocalDate createdDate, LocalDate updatedDate) {
+		super();
+		this.planId = planId;
+		this.planName = planName;
+		this.planStartDate = planStartDate;
+		this.planEndDate = planEndDate;
+		this.activeSw = activeSw;
+		this.comments = comments;
+		this.createdDate = createdDate;
+		this.updatedDate = updatedDate;
+	}
+
+	
+
+	@Override
+	public String toString() {
+		return "PlanMaster [planId=" + planId + ", planName=" + planName + ", planStartDate=" + planStartDate
+				+ ", planEndDate=" + planEndDate + ", comments=" + comments + ", createdDate=" + createdDate
+				+ ", updatedDate=" + updatedDate + "]";
+	}
+
+	public PlanMaster() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+}

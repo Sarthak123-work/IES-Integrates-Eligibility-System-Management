@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: ED_API
+  boot:
+    admin:
+      notify:
+        pagerduty:
+          client-url: http://localhost:9003
+          instance:
+            perfer-ip: true
+            
+server:
+  port: 7008
+  
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+      
+  instance:
+    hostname: localhost
+    
+    
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  security:
+    enabled: false

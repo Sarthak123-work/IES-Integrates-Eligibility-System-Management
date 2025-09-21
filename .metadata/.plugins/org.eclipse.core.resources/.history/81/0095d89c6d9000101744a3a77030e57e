@@ -1,0 +1,84 @@
+package com.IES.DC.Controller;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.IES.DC.Dto.EductationDto;
+import com.IES.DC.Dto.IncomeDto;
+import com.IES.DC.Dto.KidsDto;
+import com.IES.DC.Dto.SummeryResponseDto;
+import com.IES.DC.Service.DcService;
+
+import lombok.extern.slf4j.Slf4j;
+
+@RestController
+@Slf4j
+@RequestMapping("/IES/DC")
+public class DcController {
+
+	@Autowired
+	private DcService dcservice;
+
+	@PostMapping("/saveIncome/{appNum}")
+	public ResponseEntity<?> saveIncome(@Valid @RequestBody IncomeDto income, @PathVariable Integer appNum) {
+
+		log.info("Dc controller :: " + income);
+		boolean result = dcservice.saveIncome(income, appNum);
+		if (result) {
+			return new ResponseEntity<>("Income Details Saved", HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>("Income Details Not - Saved", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+//		return new ResponseEntity();
+	}
+
+	@PostMapping("/saveEducation/{appNum}")
+	@PreAuthorize("hasAnyRole('citizne')")
+	public ResponseEntity<?> saveEducation(@Valid @RequestBody EductationDto eduDto, @PathVariable Integer appNum) {
+
+		log.info("Dc controller :: " + eduDto);
+		boolean result = dcservice.saveEducation(eduDto, appNum);
+		if (result) {
+			return new ResponseEntity<>("Education Details Saved", HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>("Education Details Not - Saved", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+//		return new ResponseEntity();
+	}
+
+	@PostMapping("/saveKids/{appNum}")
+	public ResponseEntity<?> saveKids(@Valid @RequestBody KidsDto kidsdto, @PathVariable Integer appNum) {
+
+		log.info("Dc controller :: " + kidsdto);
+		boolean result = dcservice.saveKids(kidsdto, appNum);
+		if (result) {
+			return new ResponseEntity<>("Kids Details Saved", HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>("Kids Details Not - Saved", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+//		return new ResponseEntity();
+	}
+
+	@GetMapping("/summary/{appNum}")
+	public ResponseEntity<?> summary(@PathVariable Integer appNum) {
+
+		log.info("Controller layer " + appNum);
+
+		SummeryResponseDto summeryData = dcservice.getSummeryData(appNum);
+
+		log.info("after Service layer Call" + summeryData);
+		return new ResponseEntity<>(summeryData, HttpStatus.OK);
+
+//		return new ResponseEntity();
+	}
+}
